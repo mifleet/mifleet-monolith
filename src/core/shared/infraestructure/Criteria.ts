@@ -4,7 +4,6 @@
  * data from the database
  *
  */
-export class Criteria{
-    public meetCriteria(){
-    }
+export interface Criteria{
+    meetCriteria();
 }
