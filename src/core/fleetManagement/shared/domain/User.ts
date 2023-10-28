@@ -5,17 +5,11 @@ import { UserId } from "./UserId";
 import { UserLastName } from "./UserLastName";
 
 export class User extends AggregateRoot {
-    private readonly _id: UserId;
-    private readonly _firstName: UserFirstName;
-    private readonly _lastName: UserLastName;
-    private readonly _email: UserEmail;
-
-    constructor(id: number, firstName: string, lastName: string, email: string) {
+    constructor(private readonly _id: UserId, 
+                private readonly _firstName: UserFirstName, 
+                private readonly _lastName: UserLastName, 
+                private readonly _email: UserEmail) {
         super();
-        this._id = UserId.from(id);
-        this._firstName = UserFirstName.from(firstName);
-        this._lastName = UserLastName.from(lastName);
-        this._email = UserEmail.from(email);
     }
 
     public get id(): number {
@@ -34,7 +28,13 @@ export class User extends AggregateRoot {
         return this._email.getValue();
     }
 
-    public static create(id: number, firstName: string, lastName: string, email: string): User {
+    public static create(_id: number,  _firstName: string, _lastName: string, _email: string): User {
+        //Create Value Objects
+        const id = UserId.from(_id);
+        const firstName = UserFirstName.from(_firstName);
+        const lastName = UserLastName.from(_lastName);
+        const email = UserEmail.from(_email);
+
         const user = new User(id, firstName, lastName, email);
         //add domain events here
         // user.record(new UserCreatedDomainEvent(id, firstName, lastName, email));
