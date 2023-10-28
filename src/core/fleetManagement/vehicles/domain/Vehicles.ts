@@ -1,4 +1,4 @@
-import { Entity } from "../../../../core/shared/domain/Entity";
+import { AggregateRoot } from "../../../../core/shared/domain/AggregateRoot";
 
-class Vehicle extends Entity{
+export class Vehicle extends AggregateRoot {
 }

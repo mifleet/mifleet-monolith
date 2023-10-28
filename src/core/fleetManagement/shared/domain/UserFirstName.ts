@@ -7,4 +7,8 @@ export class UserFirstName extends ValueObject<string>{
             throw new DomainError("Invalid first name");
         }
     }
+
+    public static from(value: string): UserFirstName {
+        return new UserFirstName(value);
+    }
 }

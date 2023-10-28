@@ -1,1 +1,2 @@
-export class DomainEvent{}
+export class DomainEvent {
+}

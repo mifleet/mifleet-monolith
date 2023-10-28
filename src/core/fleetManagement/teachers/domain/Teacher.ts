@@ -1,4 +1,4 @@
-import { Entity } from "../../../../core/shared/domain/Entity";
+import { AggregateRoot } from "../../../../core/shared/domain/AggregateRoot";
 
-class Teacher extends Entity {
+export class Teacher extends AggregateRoot {
 }

@@ -1,4 +1,4 @@
-import { Criteria } from "./Criteria";
+import { Criteria } from "../domain/criteria/Criteria";
 
 export interface Repository<T> {
     add(entity: T): void;
@@ -6,6 +6,6 @@ export interface Repository<T> {
     update(entity: T): void;
     find(id: string): T;
     findAll(): T[];
-    findByCriteria(criteria: Criteria): T[];
+    matching(criteria: Criteria): T[];
     findByIds(ids: number | string[]): T[];
 }
