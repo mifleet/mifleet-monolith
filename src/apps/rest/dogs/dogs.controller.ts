@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { CreateDrivingSchoolOnUserCreated } from 'src/core/fleetManagement/drivingSchools/application/subscribers/CreateDrivingSchoolOnUserCreated';
 import { UserRegistrar } from 'src/core/fleetManagement/users/application/useCases/UserRegistrar';
 import { UsersFetcher } from 'src/core/fleetManagement/users/application/useCases/UsersFetcher';
 import { InMemoryUserRepository } from 'src/core/fleetManagement/users/infraestructure/InMemoryUserRepository';
@@ -10,25 +11,25 @@ export class DogsController {
 
     userRepository = new InMemoryUserRepository();
     uuidGenerator = new MockUuidGenerator();
-    eventBus = new InMemoryEventBus();
+    eventBus = new InMemoryEventBus([new CreateDrivingSchoolOnUserCreated()]);
 
     @Get('/')
     async getHello() {
         const useCase = new UsersFetcher(this.userRepository);
-        const users = await useCase.fetchAll();
-
+        const result = await useCase.fetchAll();
+        if (result.isOk()) return result.getValue()
         return {
-            result: users,
+            error: result.getError(),
         };
     }
 
     @Get('/create')
-    async create(){
+    async create() {
         const useCase = new UserRegistrar(this.userRepository, this.eventBus, this.uuidGenerator);
-        await useCase.registrar("josericardopenase@gmail.com", "firstName", "lastName");
-
+        const result = await useCase.registrar("josericardopenase@gmail.com", "firstName", "lastName");
+        if (result.isOk()) return result.getValue()
         return {
-            result: "User created",
+            error: result.getError(),
         };
     }
 }

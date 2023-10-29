@@ -1,33 +1,52 @@
 import { EventBus } from "../application/adapters/EventBus";
 import { DomainEvent } from "../domain/DomainEvent";
+import { DomainEventSubscriber } from "../domain/DomainEventSubscriber";
 
-export class InMemoryEventBus implements EventBus{
-    private readonly listeners: Map<string, ((event : DomainEvent) => void)[]>;
+export class InMemoryEventBus implements EventBus {
+    private readonly subscriptions: Map<string, Function[]> = new Map();
 
-    constructor() {
-        this.listeners = new Map<string, ((event : DomainEvent) => void)[]>();
+    constructor(subscribers: DomainEventSubscriber<DomainEvent>[]) {
+        this.registerSubscribers(subscribers);
     }
 
-    publish(event: DomainEvent[]): Promise<void> {
-        return new Promise<void>((resolve, reject) => {
-            // biome-ignore lint/complexity/noForEach: <explanation>
-            event.forEach(e => {
-                console.log(`Event published: ${JSON.stringify(e)}`);
-                const listeners = this.listeners.get(e.eventName);
+    async publish(events: DomainEvent[]): Promise<void> {
+        const executions: unknown[] = [];
+
+        // biome-ignore lint/complexity/noForEach: <explanation>
+        events.forEach((event) => {
+            const subscribers = this.subscriptions.get(event.slug);
+
+            if (subscribers) {
                 // biome-ignore lint/complexity/noForEach: <explanation>
-                listeners?.forEach(listener => listener(e));
-            });
-            resolve();
+                subscribers.forEach((subscriber) => {
+                    executions.push(subscriber(event));
+                });
+            }
+        });
+
+        await Promise.all(executions).catch((error) => {
+            console.error("Executing subscriptions:", error);
         });
     }
-    register(eventName : string, listener: (event: DomainEvent) => void): void {
-        if (this.listeners.has(eventName)) {
-            const listeners = this.listeners.get(eventName);
-            listeners?.push(listener);
-        } else {
-            this.listeners.set(eventName, [listener]);
-        }
+
+    private registerSubscribers(subscribers: DomainEventSubscriber<DomainEvent>[]): void {
+        // biome-ignore lint/complexity/noForEach: <explanation>
+        subscribers.forEach((subscriber) => {
+            // biome-ignore lint/complexity/noForEach: <explanation>
+            subscriber.subscribedTo().forEach((event) => {
+                this.subscribe(event.slug, subscriber);
+            });
+        });
     }
 
-}
+    private subscribe(topic: string, subscriber: DomainEventSubscriber<DomainEvent>): void {
+        const currentSubscriptions = this.subscriptions.get(topic);
+        const subscription = subscriber.on.bind(subscriber);
 
+        if (currentSubscriptions) {
+            currentSubscriptions.push(subscription);
+        } else {
+            this.subscriptions.set(topic, [subscription]);
+        }
+    }
+}
