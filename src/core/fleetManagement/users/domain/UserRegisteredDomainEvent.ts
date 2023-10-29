@@ -4,7 +4,7 @@ export class UserRegisteredDomainEvent extends DomainEvent{
     public static slug  = "fleetManagement.user.registered"
 
     constructor(
-        public readonly id : number,
+        public readonly id : string,
         public readonly email : string,
         public readonly firstName : string,
         public readonly lastName : string

@@ -3,7 +3,7 @@ import { ValueObject } from "../../../shared/domain/ValueObject";
 
 export class UserFirstName extends ValueObject<string>{
     public validate(): void {
-        if(this.value.length < 3){
+        if(this.getValue().length < 3){
             throw new DomainError("Invalid first name");
         }
     }

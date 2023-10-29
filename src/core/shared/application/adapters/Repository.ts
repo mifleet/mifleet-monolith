@@ -1,4 +1,4 @@
-import { Criteria } from "../domain/criteria/Criteria";
+import { Criteria } from "../../domain/criteria/Criteria";
 
 export interface Repository<T> {
     save(entity: T): Promise<void>;
