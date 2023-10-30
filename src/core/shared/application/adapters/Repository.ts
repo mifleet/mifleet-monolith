@@ -7,5 +7,5 @@ export interface Repository<T> {
     find(id: string): Promise<T>;
     findAll(): Promise<T[]>;
     matching(criteria: Criteria): Promise<T[]>;
-    findByIds(ids: number | string[]): Promise<T[]>;
+    findByIds(ids: string[]): Promise<T[]>;
 }

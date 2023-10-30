@@ -1,16 +1,22 @@
 import { UniqueIdentifier } from "src/core/shared/domain/primitives/UniqueIdentifier";
 import { AggregateRoot } from "../../../../core/shared/domain/AggregateRoot";
+import { Teacher } from "./Teacher";
 import { UserEmail } from "./UserEmail";
 import { UserFirstName } from "./UserFirstName";
 import { UserLastName } from "./UserLastName";
-import { UserRegisteredDomainEvent } from "./UserRegisteredDomainEvent";
+import { UserRole } from "./UserRole";
+import { Owner } from "./Owner";
 
-export class User extends AggregateRoot {
+export abstract class User extends AggregateRoot {
+
+    protected _role: UserRole
+
     constructor(
         private readonly _id: UniqueIdentifier,
         private readonly _firstName: UserFirstName,
         private readonly _lastName: UserLastName,
-        private readonly _email: UserEmail) {
+        private readonly _email: UserEmail,
+    ) {
         super();
     }
 
@@ -30,14 +36,5 @@ export class User extends AggregateRoot {
         return this._email.getValue();
     }
 
-    public static create(_id: string, _firstName: string, _lastName: string, _email: string): User {
-        const id = UniqueIdentifier.from(_id);
-        const firstName = UserFirstName.from(_firstName);
-        const lastName = UserLastName.from(_lastName);
-        const email = UserEmail.from(_email);
 
-        const user = new User(id, firstName, lastName, email);
-        user.record(new UserRegisteredDomainEvent(user.id, user.firstName, user.lastName, user.email));
-        return user;
-    }
 }

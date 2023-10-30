@@ -3,6 +3,7 @@ import { AggregateRoot } from "../../../../core/shared/domain/AggregateRoot";
 import { DrivingSchoolColors } from "./DrivingSchoolColor";
 import { DrivingSchoolLogo } from "./DrivingSchoolLogo";
 import { DrivingSchoolName } from "./DrivingSchoolName";
+import { DrivingSchoolSection } from "./DrivingSchoolSection";
 
 export class DrivingSchool extends AggregateRoot {
 
@@ -10,6 +11,7 @@ export class DrivingSchool extends AggregateRoot {
     private readonly _name : DrivingSchoolName;
     private readonly _logo : DrivingSchoolLogo;
     private readonly _color : DrivingSchoolColors;
+    private _sections : DrivingSchoolSection[] = [];
 
     constructor(id: string, name: string, logo: string, color: string) {
         super();
@@ -40,5 +42,24 @@ export class DrivingSchool extends AggregateRoot {
         //add domain events here
         // drivingSchool.record(new DrivingSchoolCreatedDomainEvent(id, name, logo, color));
         return drivingSchool;
+    }
+
+    public addSection(section : DrivingSchoolSection) : void {
+        this._sections.push(section);
+    }
+
+    public removeSection(sectionId : string) : void {
+        this._sections = this._sections.filter(section => section.id !== sectionId);
+    }
+
+    public changeSectionDirection(sectionId : string, direction : string) : void {
+        const section = this._sections.find(section => section.id === sectionId);
+        if(section){
+            section.changeDirection(direction);
+        }
+    }
+
+    public get sectionIds() : string[] {
+        return this._sections.map(section => section.id);
     }
 }
