@@ -1,11 +1,9 @@
 import { UniqueIdentifier } from "src/core/shared/domain/primitives/UniqueIdentifier";
-import { AggregateRoot } from "../../../../core/shared/domain/AggregateRoot";
-import { Teacher } from "./Teacher";
+import { AggregateRoot } from "../../../../../core/shared/domain/AggregateRoot";
 import { UserEmail } from "./UserEmail";
 import { UserFirstName } from "./UserFirstName";
 import { UserLastName } from "./UserLastName";
 import { UserRole } from "./UserRole";
-import { Owner } from "./Owner";
 
 export abstract class User extends AggregateRoot {
 

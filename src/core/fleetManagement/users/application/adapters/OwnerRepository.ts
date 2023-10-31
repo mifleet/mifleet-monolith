@@ -1,5 +1,5 @@
 import { Repository } from "src/core/shared/application/adapters/Repository";
-import { Owner } from "../../domain/Owner";
+import { Owner } from "../../domain/model/Owner";
 
 export interface OwnerRepository extends Repository<Owner> {
     findByEmail(email: string): Promise<Owner>;

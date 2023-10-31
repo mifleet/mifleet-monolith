@@ -1,4 +1,4 @@
-import { DomainEvent } from "../../../../core/shared/domain/DomainEvent";
+import { DomainEvent } from "src/core/shared/domain/DomainEvent";
 
 export class UserRegisteredDomainEvent extends DomainEvent{
     public static slug  = "fleetManagement.user.registered"

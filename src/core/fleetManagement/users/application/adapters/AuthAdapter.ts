@@ -1,4 +1,4 @@
-import { User } from "../../domain/User";
+import { User } from "../../domain/model/User";
 
 export interface AuthAdapter{
     isAuthenticated() : boolean;

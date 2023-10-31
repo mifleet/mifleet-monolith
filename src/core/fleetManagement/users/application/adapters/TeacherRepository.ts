@@ -1,5 +1,5 @@
 import { Repository } from "src/core/shared/application/adapters/Repository";
-import { Teacher } from "../../domain/Teacher";
+import { Teacher } from "../../domain/model/Teacher";
 
 export interface TeacherRepository extends Repository<Teacher> {
     findByEmail(email: string): Promise<Teacher>;

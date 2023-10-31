@@ -1,7 +1,8 @@
 import { UuidGenerator } from "src/core/shared/application/adapters/UuidGenerator";
 import { TeacherRepository } from "../../adapters/TeacherRepository";
 import { AddTeacherToDrivingSchoolDTO } from "./AddTeacherToDrivingSchoolDTO";
-import { Teacher } from "../../../domain/Teacher";
+import { Result } from "src/core/shared/utils/Result";
+import { Teacher } from "../../../domain/model/Teacher";
 
 export class AddTeacherToDrivingSchoolUseCase{
     constructor(
@@ -10,7 +11,7 @@ export class AddTeacherToDrivingSchoolUseCase{
     ){
     }
 
-    public async execute(request : AddTeacherToDrivingSchoolDTO) : Promise<void>{
+    public async execute(request : AddTeacherToDrivingSchoolDTO){
         const id  = await this.uuidGenerator.generate();
         const teacher = Teacher.from({
             id,
@@ -20,5 +21,6 @@ export class AddTeacherToDrivingSchoolUseCase{
             drivingSchoolSectionId: request.drivingSchoolSectionId
         });
         await this.repository.save(teacher);
+        return Result.ok(teacher);
     }
 }

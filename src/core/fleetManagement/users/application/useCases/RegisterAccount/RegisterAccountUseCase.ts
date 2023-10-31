@@ -1,7 +1,8 @@
 import { UuidGenerator } from "src/core/shared/application/adapters/UuidGenerator";
 import { OwnerRepository } from "../../adapters/OwnerRepository";
 import { RegisterAccountDTO } from "./RegisterAccountDTO";
-import { Owner } from "../../../domain/Owner";
+import { Result } from "src/core/shared/utils/Result";
+import { Owner } from "../../../domain/model/Owner";
 
 export class RegisterAccountUseCase {
 
@@ -10,7 +11,7 @@ export class RegisterAccountUseCase {
         private readonly uuidGenerator: UuidGenerator
     ) { }
 
-    public async execute(request: RegisterAccountDTO): Promise<void> {
+    public async execute(request: RegisterAccountDTO) {
         const uuid = await this.uuidGenerator.generate();
         const owner = Owner.from({ 
             id: uuid, 
@@ -19,5 +20,6 @@ export class RegisterAccountUseCase {
             email: request.ownerEmail 
         });
         await this.ownerRepository.save(owner);
+        return Result.ok(owner);
     }
 }
