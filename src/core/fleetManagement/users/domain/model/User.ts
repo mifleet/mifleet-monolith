@@ -1,4 +1,4 @@
-import { UniqueIdentifier } from "src/core/shared/domain/primitives/UniqueIdentifier";
+import { UniqueIdentifier } from "@core/shared/domain/primitives/UniqueIdentifier";
 import { AggregateRoot } from "../../../../../core/shared/domain/AggregateRoot";
 import { UserEmail } from "./UserEmail";
 import { UserFirstName } from "./UserFirstName";
@@ -13,7 +13,6 @@ interface CreateUserDTO{
 }
 
 export class User extends AggregateRoot {
-
     protected _role: UserRole
 
     private constructor(
@@ -42,7 +41,7 @@ export class User extends AggregateRoot {
         return this._email.getValue();
     }
 
-    public owner(data : CreateUserDTO){
+    public static owner(data : CreateUserDTO){
         return new User(
             UniqueIdentifier.from(data.id),
             UserFirstName.from(data.firstName),
@@ -52,7 +51,7 @@ export class User extends AggregateRoot {
         )
     }
 
-    public teacher(data : CreateUserDTO){
+    public static teacher(data : CreateUserDTO){
         return new User(
             UniqueIdentifier.from(data.id),
             UserFirstName.from(data.firstName),

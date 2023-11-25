@@ -1,4 +1,4 @@
-import { Result } from "src/core/shared/utils/Result";
+import { Result } from "../../../../core/shared/utils/Result";
 import { AuthProvider } from "../application/adapters/AuthProvider";
 import { Credential } from "../domain/model/Credential";
 import { User } from "../domain/model/User";

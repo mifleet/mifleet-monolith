@@ -1,15 +1,14 @@
 import { NextFunction, Request, Response  } from 'express';
-import { UserAuthenticator } from '../../../core/users/application/useCases/UserAuthenticator';
-import { User } from '../../../core/users/domain/User';
-import { userRepository } from '../dependencies';
+import { authProvider, userRepository } from '../dependencies';
 import { Result } from '../../../core/shared/utils/Result';
+import { AuthenticateUserUseCase } from 'src/core/fleetManagement/users/application/useCases/AuthenticateUserUserCase';
+import {Credential} from '../../../core/fleetManagement/users/domain/model/Credential';
 
 export const authenticateUserMiddleware = (req : Request , res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
     const token = authHeader?.split(' ')[1];
-    const useCase = new UserAuthenticator(userRepository)
-    const result = useCase.authenticate(token || "");
-    if(result.isOk()) req.user = result.getValue() as User
+    const useCase = new AuthenticateUserUseCase(authProvider, userRepository)
+    const result = useCase.execute(new Credential({token : token}));
     next();
 };
 
