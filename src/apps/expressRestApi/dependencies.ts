@@ -1,6 +1,6 @@
-import { InMemoryBearerTokenAuthProvider } from "src/core/fleetManagement/users/infraestructure/BearerTokenAuthProvider";
-import { InMemoryUserRepository } from "src/core/fleetManagement/users/infraestructure/InMemoryUserRepository";
-import { MockUuidGenerator } from "src/core/shared/infraestructure/MockUuidGenerator";
+import { InMemoryBearerTokenAuthProvider } from "../../core/fleetManagement/users/infraestructure/BearerTokenAuthProvider";
+import { InMemoryUserRepository } from "../../core/fleetManagement/users/infraestructure/InMemoryUserRepository";
+import { MockUuidGenerator } from "../../core/shared/infraestructure/MockUuidGenerator";
 
 export const userRepository = new InMemoryUserRepository()
 export const uuidGenerator = new MockUuidGenerator();

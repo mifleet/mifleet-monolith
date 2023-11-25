@@ -2,4 +2,5 @@ import { Repository } from "../../../../../core/shared/application/adapters/Repo
 import { User } from "../../domain/model/User";
 
 export interface UserRepository extends Repository<User>{
+    findUserByEmail(email : string) : Promise<User | undefined>
 } 
