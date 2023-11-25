@@ -5,7 +5,7 @@ import { Teacher } from "../domain/model/Teacher";
 export class InMemoryTeacherRepository extends InMemoryRepository<Teacher> implements TeacherRepository{
     isTeacherRegistered(email: string): Promise<boolean> {
         return new Promise((resolve, reject) => {   
-            const owner = this.items.find((owner) => {
+            const owner = this.entities.find((owner) => {
                 return owner.email === email;
             });
     
@@ -15,7 +15,7 @@ export class InMemoryTeacherRepository extends InMemoryRepository<Teacher> imple
 
     findByEmail(email: string): Promise<Teacher> {
         return new Promise((resolve, reject) => {   
-            const owner = this.items.find((owner) => {
+            const owner = this.entities.find((owner) => {
                 return owner.email === email;
             });
     
@@ -23,12 +23,6 @@ export class InMemoryTeacherRepository extends InMemoryRepository<Teacher> imple
         })
     }
     findByEmailAndPassword(email: string, password: string): Promise<Teacher> {
-        return new Promise((resolve, reject) => {   
-            const owner = this.items.find((owner) => {
-                return owner.email === email && owner.password === password;
-            });
-    
-            resolve(owner);
-        })
+        return null
     }
 }

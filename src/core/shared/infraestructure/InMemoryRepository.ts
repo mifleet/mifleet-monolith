@@ -2,7 +2,7 @@ import { Repository } from "../application/adapters/Repository";
 import { Criteria } from "../domain/criteria/Criteria";
 
 export class InMemoryRepository<T extends {id : string}>  implements Repository<T>{
-    private readonly entities: T[] = [];
+    protected readonly entities: T[] = [];
 
     save(entity: T): Promise<void> {
         return new Promise((resolve, reject) => {

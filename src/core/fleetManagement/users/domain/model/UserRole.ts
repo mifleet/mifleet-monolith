@@ -12,15 +12,15 @@ export class UserRole extends ValueObject<string>{
         }
     }
 
-    static owner() : UserRole {
+    static get owner() : UserRole {
         return new UserRole(this.OWNER);
     }
 
-    static teacher() : UserRole {
+    static get teacher() : UserRole {
         return new UserRole(this.TEACHER);
     }
 
-    static secretary() : UserRole {
+    static get secretary() : UserRole {
         return new UserRole(this.SECRETARY);
     }
 }

@@ -5,7 +5,7 @@
 //
 
 export interface RegisterAccountDTO{
-    ownerFirstName : string;
-    ownerLastName : string;
-    ownerEmail : string;
+    firstName : string;
+    lastName : string;
+    email : string;
 }

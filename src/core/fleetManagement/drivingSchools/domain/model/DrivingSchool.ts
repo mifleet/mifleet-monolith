@@ -1,5 +1,5 @@
 import { UniqueIdentifier } from "src/core/shared/domain/primitives/UniqueIdentifier";
-import { AggregateRoot } from "../../../../core/shared/domain/AggregateRoot";
+import { AggregateRoot } from "../../../../../core/shared/domain/AggregateRoot";
 import { DrivingSchoolColors } from "./DrivingSchoolColor";
 import { DrivingSchoolLogo } from "./DrivingSchoolLogo";
 import { DrivingSchoolName } from "./DrivingSchoolName";

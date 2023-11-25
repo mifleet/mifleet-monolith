@@ -5,15 +5,23 @@ import { UserFirstName } from "./UserFirstName";
 import { UserLastName } from "./UserLastName";
 import { UserRole } from "./UserRole";
 
-export abstract class User extends AggregateRoot {
+interface CreateUserDTO{
+    id : string,
+    firstName : string,
+    lastName : string,
+    email : string,
+}
+
+export class User extends AggregateRoot {
 
     protected _role: UserRole
 
-    constructor(
+    private constructor(
         private readonly _id: UniqueIdentifier,
         private readonly _firstName: UserFirstName,
         private readonly _lastName: UserLastName,
         private readonly _email: UserEmail,
+        private readonly _userRole : UserRole
     ) {
         super();
     }
@@ -34,5 +42,23 @@ export abstract class User extends AggregateRoot {
         return this._email.getValue();
     }
 
+    public owner(data : CreateUserDTO){
+        return new User(
+            UniqueIdentifier.from(data.id),
+            UserFirstName.from(data.firstName),
+            UserFirstName.from(data.lastName),
+            UserEmail.from(data.email),
+            UserRole.owner
+        )
+    }
 
+    public teacher(data : CreateUserDTO){
+        return new User(
+            UniqueIdentifier.from(data.id),
+            UserFirstName.from(data.firstName),
+            UserFirstName.from(data.lastName),
+            UserEmail.from(data.email),
+            UserRole.teacher
+        )
+    }
 }

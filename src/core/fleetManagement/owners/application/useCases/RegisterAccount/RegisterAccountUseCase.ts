@@ -5,19 +5,18 @@ import { Result } from "src/core/shared/utils/Result";
 import { Owner } from "../../../domain/model/Owner";
 
 export class RegisterAccountUseCase {
-
     constructor(
         private readonly ownerRepository: OwnerRepository,
         private readonly uuidGenerator: UuidGenerator
-    ) { }
+    ) {}
 
     public async execute(request: RegisterAccountDTO) {
         const uuid = await this.uuidGenerator.generate();
         const owner = Owner.from({ 
             id: uuid, 
-            firstName: request.ownerFirstName, 
-            lastName: request.ownerLastName, 
-            email: request.ownerEmail 
+            firstName: request.firstName, 
+            lastName: request.lastName, 
+            email: request.email 
         });
         await this.ownerRepository.save(owner);
         return Result.ok(owner);

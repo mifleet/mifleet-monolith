@@ -1,4 +1,8 @@
 {
+  "include": ["./**/*"],
+  "files": [
+    "./types/express/index.d.ts"
+  ],
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,

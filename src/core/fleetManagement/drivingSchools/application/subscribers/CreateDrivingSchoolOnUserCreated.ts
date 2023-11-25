@@ -1,6 +1,6 @@
 import { DomainEventSubscriber } from "src/core/shared/domain/DomainEventSubscriber";
 import { DomainEventName } from "src/core/shared/domain/DomainEventName";
-import { UserRegisteredDomainEvent } from "src/core/fleetManagement/users/domain/events/UserRegisteredDomainEvent";
+import { UserRegisteredDomainEvent } from "src/core/fleetManagement/teachers/domain/events/UserRegisteredDomainEvent";
 
 export class CreateDrivingSchoolOnUserCreated implements DomainEventSubscriber<UserRegisteredDomainEvent>{
     async on(domainEvent: UserRegisteredDomainEvent): Promise<void> {
