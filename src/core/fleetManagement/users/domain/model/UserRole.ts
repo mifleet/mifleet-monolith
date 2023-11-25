@@ -1,5 +1,5 @@
-import { DomainError } from "src/core/shared/domain/DomainError";
-import { ValueObject } from "src/core/shared/domain/ValueObject";
+import { DomainError } from "../../../../../core/shared/domain/DomainError";
+import { ValueObject } from "../../../../../core/shared/domain/ValueObject";
 
 export class UserRole extends ValueObject<string>{
     public static readonly OWNER = "OWNER";

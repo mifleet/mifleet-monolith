@@ -1,7 +1,7 @@
 import { AuthProvider } from "../adapters/AuthProvider";
 import { UserRepository } from "../adapters/UserRepository";
 import { Credential } from "../../domain/model/Credential";
-import { Result } from "src/core/shared/utils/Result";
+import { Result } from "../../../../shared/utils/Result";
 
 export class AuthenticateUserUseCase<T>{
     constructor(private readonly authProvider : AuthProvider<T>, private readonly userRepository : UserRepository){

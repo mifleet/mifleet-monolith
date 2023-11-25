@@ -1,4 +1,4 @@
-import { UniqueIdentifier } from "@core/shared/domain/primitives/UniqueIdentifier";
+import { UniqueIdentifier } from "../../../../shared/domain/primitives/UniqueIdentifier";
 import { AggregateRoot } from "../../../../../core/shared/domain/AggregateRoot";
 import { UserEmail } from "./UserEmail";
 import { UserFirstName } from "./UserFirstName";

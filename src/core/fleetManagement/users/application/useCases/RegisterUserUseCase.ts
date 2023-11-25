@@ -7,7 +7,7 @@ export class RegisterUserUseCase{
 
     constructor(private readonly userRepository : UserRepository, private readonly uuidGenerator : UuidGenerator){}
 
-    async execute(data : {name : string, email : string, firstName : string, lastName : string, password : string}){
+    async execute(data : {name : string, email : string, firstName : string, lastName : string, password : string}) : Promise<Result<User, string>>{
         try{
             const id = await this.uuidGenerator.generate()
             const user = User.teacher({
