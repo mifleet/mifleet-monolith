@@ -1,73 +1,74 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# MiFleet: API de Gestión de Flotas para Autoescuelas
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descripción General
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+MiFleet es una API RESTful diseñada para facilitar la gestión y operación de flotas vehiculares en autoescuelas. Esta solución permite a los instructores y al personal administrativo una gestión eficiente de los vehículos, alineando las prácticas de negocio con estándares modernos de sostenibilidad y eficiencia.
 
-## Description
+## Arquitectura y Diseño
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+La API está construida siguiendo los principios de la Arquitectura Limpia y Domain-Driven Design (DDD), tal como se describe en las obras de Robert C. Martin y Eric Evans, respectivamente. Esta aproximación coloca el dominio del negocio en el centro del diseño y fomenta una separación clara entre la lógica de negocio y la infraestructura.
 
-## Installation
+### Características de la Arquitectura:
 
-```bash
-$ yarn install
+- **Capas separadas** para lógica de negocio, interfaz de usuario, adaptadores y persistencia de datos.
+- **Entidades de dominio** ricas y bien definidas que encapsulan la lógica de negocio esencial.
+- **Casos de uso** que describen la lógica de negocio y las operaciones permitidas.
+- **Adaptadores** que conforman la conexión entre la API y los servicios externos o la base de datos.
+- **Eventos de dominio** que permiten una comunicación desacoplada entre diferentes partes del sistema.
+
+## Estructura de Directorios
+
+La siguiente es la estructura de directorios que refleja la organización del código siguiendo DDD:
+
+```
+fleetManagement/
+│
+├── drivingSchools/
+│   ├── application/
+│   │   └── subscribers/
+│   │       └── CreateDrivingSchoolOnUserCreated.ts
+│   ├── domain/
+│   │   ├── model/
+│   │   │   └── DrivingSchool.ts
+│   │   │   └── ...
+│   └── ...
+│
+├── expenses/
+│   └── domain/
+│       └── Expense.ts
+│
+└── users/
+    ├── application/
+    │   ├── useCases/
+    │   │   ├── FindUserTokenUseCase.ts
+    │   │   └── RegisterUserUseCase.ts
+    │   └── ...
+    ├── domain/
+    │   ├── model/
+    │   │   └── User.ts
+    │   │   └── Owner.ts
+    │   │   └── Teacher.ts
+    │   └── ...
+    └── ...
 ```
 
-## Running the app
+### Ejemplos de Endpoints:
 
-```bash
-# development
-$ yarn run start
+- **POST `/login`**: Endpoint para autenticación de usuarios.
+- **POST `/register`**: Endpoint para el registro de nuevos usuarios.
 
-# watch mode
-$ yarn run start:dev
+## Desarrollo Local
 
-# production mode
-$ yarn run start:prod
-```
+Para configurar el entorno de desarrollo local y comenzar a trabajar con la API, siga estos pasos:
 
-## Test
+1. Clonar el repositorio.
+2. Instalar las dependencias con `npm install`.
+3. Iniciar el servidor de desarrollo con `npm run dev`.
 
-```bash
-# unit tests
-$ yarn run test
+## Contribuciones
 
-# e2e tests
-$ yarn run test:e2e
+Las contribuciones para mejorar MiFleet son bienvenidas. Consulte el archivo `CONTRIBUTING.md` para obtener detalles sobre el proceso de contribución.
 
-# test coverage
-$ yarn run test:cov
-```
+## Licencia
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Este proyecto se distribuye bajo la licencia [Nombre de la Licencia]. Para más detalles, vea el archivo `LICENSE`.
